@@ -6,6 +6,7 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 from scrapy import Item
+import settings
 import pymongo
 
 class MonitorPipeline(object):
@@ -15,8 +16,8 @@ class MonitorPipeline(object):
         port = settings["MONGODB_PORT"]
         dbName = settings["MONGODB_DBNAME"]
         client = pymongo.MongoClient(host = host, port = port)
-        tdb = client(dbName)
-        self.post = tdb[settings["MONGDO_DOCNAME"]]
+        tdb = client[dbName]
+        self.post = tdb[settings["MONGODB_CONAME"]]
 
     def process_item(self, item, spider):
         news = dict(item)
