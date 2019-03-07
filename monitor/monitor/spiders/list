@@ -1,1 +1,3 @@
-http://scse.buaa.edu.cn/xwgg/gggs.htm  //*[@id="lm_right"]/div[2]/ul/li
+http://scse.buaa.edu.cn/xwgg/gggs.htm  //*[@id="lm_right"]/div[2]/ul/li a/
+http://cs.hust.edu.cn/zxtz/yjs.htm   /html/body/div[4]/div/div[1]/div/div[1]/ul/li  p/a/
+http://www.ict.ac.cn/shye/tzgg/ .//td[@class="black_14"]/  a/
