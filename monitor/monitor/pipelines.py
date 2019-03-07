@@ -20,7 +20,7 @@ flag = False
 mail_host = "smtp.163.com"
 mail_user = os.environ["MAIL_USER"]
 sender = os.environ["SENDER"]
-receivers = os.environ["RECEVIER"]
+receivers = os.environ["RECEIVER"]
 mail_pass = os.environ["MAIL_PASS"]
 
 def send(content):
