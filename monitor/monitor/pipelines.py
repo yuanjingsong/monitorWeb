@@ -18,8 +18,11 @@ class MonitorPipeline(object):
         client = pymongo.MongoClient(host = host, port = port)
         tdb = client[dbName]
         self.post = tdb[settings["MONGODB_DOCNAME"]]
+        self.query = tdb[settings["MONGODB_DOCNAME"]]
 
     def process_item(self, item, spider):
         news = dict(item)
-        self.post.insert_one(news).inserted_id
+        res = self.post.find_one({'news_url' : news["news_url"]})
+        if not res:
+            self.post.insert_one(news).inserted_id
         return item
