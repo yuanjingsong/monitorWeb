@@ -18,22 +18,22 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 content = ""
 flag = False
 mail_host = "smtp.163.com"
-mail_user = "18191605267"
-sender = "18191605267@163.com"
-receviers = ["532473857@qq.com"]
+mail_user = os.environ["MAIL_USER"]
+sender = os.environ["SENDER"]
+receivers = os.environ["RECEVIER"]
 mail_pass = os.environ["MAIL_PASS"]
 
 def send(content):
     message = MIMEText(content, "plain", "utf-8")
     message["Subject"] = 'Update'
     message["From"] = sender
-    message["To"] = receviers[0]
+    message["To"] = receivers[0]
 
     try:
         smtpObj = smtplib.SMTP_SSL()
         smtpObj.connect(mail_host, 465)
         smtpObj.login(mail_user, mail_pass)
-        smtpObj.sendmail(sender, receviers, message.as_string())
+        smtpObj.sendmail(sender, receivers, message.as_string())
         smtpObj.quit()
 
     except smtplib.SMTPException as e:
