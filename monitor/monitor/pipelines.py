@@ -6,6 +6,7 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 from scrapy import Item
+from scrapy.conf import settings
 import settings
 import pymongo
 
