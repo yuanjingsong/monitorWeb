@@ -36,16 +36,18 @@ class Spider(scrapy.Spider):
             host = url.split("cn")[0]+ "cn"
             response = Selector(response)
             news_lst = response.xpath(Spider.url_patterns[url][0])
-            print(news_lst.extract())
             for news in news_lst:
                 item = MonitorItem()
-                if (host == "http://www.ict.ac.cn"):
-                    print(Spider.url_patterns[url][1])
+                if (host == "http://www.ict.ac.cn" or host == "http://www.is.cas.cn"):
                     item["news_tiltle"] = news.xpath(Spider.url_patterns[url][1] + "/text()").extract()
                 else:
                     item['news_tiltle'] = news.xpath(Spider.url_patterns[url][1] + "/@title").extract()
-                
-                item['news_url'] = host + (news.xpath(Spider.url_patterns[url][1] + "/@href").extract()[0].split("..")[1])
+    
+                target_url = news.xpath(Spider.url_patterns[url][1] + "/@href").extract()[0]
+                if (re.match("\.{2}", target_url)):
+                    item['news_url'] = host + (target_url.split("..")[1])
+                else:
+                    item['news_url'] = url + target_url
 
                 print(item)
                 yield item
