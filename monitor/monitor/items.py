@@ -11,5 +11,5 @@ import scrapy
 class MonitorItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    news_tiltle = scrapy.Field()
+    news_title = scrapy.Field()
     news_url = scrapy.Field()

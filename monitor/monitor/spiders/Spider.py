@@ -38,9 +38,9 @@ class Spider(scrapy.Spider):
             for news in news_lst:
                 item = MonitorItem()
                 if (host == "http://www.ict.ac.cn" or host == "http://www.is.cas.cn"):
-                    item["news_tiltle"] = news.xpath(Spider.url_patterns[url][1] + "/text()").extract()
+                    item["news_title"] = news.xpath(Spider.url_patterns[url][1] + "/text()").extract()
                 else:
-                    item['news_tiltle'] = news.xpath(Spider.url_patterns[url][1] + "/@title").extract()
+                    item['news_title'] = news.xpath(Spider.url_patterns[url][1] + "/@title").extract()
     
                 target_url = news.xpath(Spider.url_patterns[url][1] + "/@href").extract()[0]
                 if (re.match("\.{2}", target_url)):
@@ -48,6 +48,5 @@ class Spider(scrapy.Spider):
                 else:
                     item['news_url'] = url + target_url
 
-                print(item)
                 yield item
 
