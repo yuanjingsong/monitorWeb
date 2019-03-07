@@ -10,20 +10,15 @@ import pymongo
 
 class MonitorPipeline(object):
 
-    def from_crawler(cls, crawler):
-        cls.DB_URL = crawler.settings.get("MONGO_DB_URI", "mogodb://localhost:27017")
-        cls.DB_NAME = crawler.settings.get("MONGO_DB_NAME", "scrapy_data")
-        return cls
-
-    def open_db(self, spider):
-        self.client = pymongo.MongoClient(self.DB_URL)
-        self.db = self.client[self.DB_NAME]
-
-    def close_spider(self, spider):
-        self.client.close()
+    def __init__(self):
+        host = settings["MONGODB_HOST"]
+        port = settings["MONGODB_PORT"]
+        dbName = settings["MONGODB_DBNAME"]
+        client = pymongo.MongoClient(host = host, port = port)
+        tdb = client(dbName)
+        self.post = tdb[settings["MONGDO_DOCNAME"]]
 
     def process_item(self, item, spider):
-        collection = self.db[spider.name]
-        post = dict(item) if isinstance(item, Item) else item
-        collection.insert_one(post)
+        news = dict(item)
+        self.post.insert(news)
         return item

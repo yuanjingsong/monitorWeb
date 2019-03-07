@@ -88,5 +88,9 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-MONGO_DB_URL = "mongodb://localhost:27017"
-MONGO_DB_NAME = "scrapy_data"
+
+MONGODB_HOST="127.0.0.1"
+MONGODB_PORT=27017
+MONGODB_DBNAME="mydb"
+MONGODB_DOCNAME="news"
+
