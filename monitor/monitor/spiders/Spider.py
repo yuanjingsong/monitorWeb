@@ -17,7 +17,6 @@ class Spider(scrapy.Spider):
             url = line.split()[0]
             first_pattern = line.split()[1]
             second_pattern = line.split()[2]
-            print(second_pattern)
             if url not in url_patterns:
                 url_patterns[url] = []
 

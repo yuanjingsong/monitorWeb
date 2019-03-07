@@ -7,7 +7,6 @@
 
 from scrapy import Item
 from scrapy.conf import settings
-import settings
 import pymongo
 
 class MonitorPipeline(object):
@@ -18,9 +17,9 @@ class MonitorPipeline(object):
         dbName = settings["MONGODB_DBNAME"]
         client = pymongo.MongoClient(host = host, port = port)
         tdb = client[dbName]
-        self.post = tdb[settings["MONGODB_CONAME"]]
+        self.post = tdb[settings["MONGODB_DOCNAME"]]
 
     def process_item(self, item, spider):
         news = dict(item)
-        self.post.insert(news)
+        self.post.insert_one(news).inserted_id
         return item
